@@ -22,10 +22,11 @@ interface Props {
   category: Category
   isSelected: boolean
   isFeatured?: boolean
+  name?: string
   onClick: () => void
 }
 
-export const MapMarker = memo(function MapMarker({ category, isSelected, isFeatured, onClick }: Props) {
+export const MapMarker = memo(function MapMarker({ category, isSelected, isFeatured, name, onClick }: Props) {
   const meta = getCategoryMeta(category)
   const emoji = CATEGORY_EMOJI[category] ?? '📍'
 
@@ -33,10 +34,13 @@ export const MapMarker = memo(function MapMarker({ category, isSelected, isFeatu
   const size = isSelected ? 44 : isFeatured ? 38 : 30
   const opacity = isSelected || isFeatured ? 1 : 0.82
 
+  // Truncate long names
+  const label = name && name.length > 16 ? name.slice(0, 15) + '…' : name
+
   return (
     <button
       onClick={e => { e.stopPropagation(); onClick() }}
-      style={{ width: size, transform: isSelected ? 'scale(1.15)' : 'scale(1)', opacity }}
+      style={{ width: 'max-content', minWidth: size, transform: isSelected ? 'scale(1.15)' : 'scale(1)', opacity }}
       className="relative flex flex-col items-center transition-all duration-200 hover:scale-110 hover:opacity-100 origin-bottom"
     >
       {/* Pin head */}
@@ -69,11 +73,35 @@ export const MapMarker = memo(function MapMarker({ category, isSelected, isFeatu
         }}
       />
 
+      {/* Name label */}
+      {label && (
+        <div
+          style={{
+            marginTop: 3,
+            paddingInline: isSelected ? 7 : 5,
+            paddingBlock: isSelected ? 2 : 1.5,
+            backgroundColor: isSelected ? meta.markerColor : 'rgba(0,0,0,0.72)',
+            border: isSelected ? 'none' : `1px solid ${meta.markerColor}60`,
+            borderRadius: 99,
+            fontSize: isSelected ? 11 : isFeatured ? 10 : 9,
+            fontWeight: isSelected ? 600 : 500,
+            color: 'white',
+            whiteSpace: 'nowrap',
+            letterSpacing: '0.01em',
+            backdropFilter: 'blur(4px)',
+            boxShadow: '0 1px 4px rgba(0,0,0,0.5)',
+            lineHeight: 1.4,
+          }}
+        >
+          {label}
+        </div>
+      )}
+
       {/* Pulse ring on selected */}
       {isSelected && (
         <span
-          className="absolute inset-0 rounded-full animate-ping opacity-40"
-          style={{ top: 0, left: 0, right: 0, height: size, backgroundColor: meta.markerColor, borderRadius: '50%' }}
+          className="absolute rounded-full animate-ping opacity-40"
+          style={{ top: 0, left: '50%', transform: 'translateX(-50%)', width: size, height: size, backgroundColor: meta.markerColor, borderRadius: '50%' }}
         />
       )}
     </button>

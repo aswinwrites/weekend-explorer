@@ -102,6 +102,7 @@ export default function MapView({ locations, selected, flyTo, onSelectLocation, 
             category={loc.primary_category}
             isSelected={isSelected}
             isFeatured={loc.is_featured}
+            name={loc.name}
             onClick={() => onSelectLocation(loc)}
           />
         )
