@@ -95,8 +95,6 @@ export function FilterPanel({ filter, onChange }: Props) {
                       style={active ? {
                         backgroundColor: getCategoryMeta(cat.slug).markerColor + '30',
                         color: getCategoryMeta(cat.slug).markerColor,
-                        ringColor: getCategoryMeta(cat.slug).markerColor,
-                        borderColor: getCategoryMeta(cat.slug).markerColor,
                         border: `1px solid ${getCategoryMeta(cat.slug).markerColor}80`,
                       } : {}}
                     >
