@@ -29,7 +29,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: data.name,
     description: data.description ?? `Discover ${data.name} — ${data.distance_km} km from Bengaluru.`,
     openGraph: {
-      title: `${data.name} | Weekend Explorer Bengaluru`,
+      title: `${data.name} | Bangalore Weekend Explorer`,
       description: data.description ?? `${data.name} is ${data.distance_km} km from Bengaluru.`,
       images: [{ url: img, width: 1200, height: 630, alt: data.name }],
       url: `${APP_URL}/place/${slug}`,

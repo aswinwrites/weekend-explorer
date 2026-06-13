@@ -29,7 +29,7 @@ export function ShareButtons({ url, name }: Props) {
   const [copied, setCopied] = useState(false)
 
   const encodedUrl  = encodeURIComponent(url)
-  const encodedText = encodeURIComponent(`Check out ${name} on Weekend Explorer Bengaluru!`)
+  const encodedText = encodeURIComponent(`Check out ${name} on Bangalore Weekend Explorer!`)
 
   const copyLink = async () => {
     try {

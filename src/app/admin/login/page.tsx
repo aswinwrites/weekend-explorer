@@ -42,7 +42,7 @@ export default function AdminLoginPage() {
 
         <div className="bg-stone-900 border border-white/8 rounded-2xl p-6">
           <h1 className="text-lg font-semibold text-stone-100 mb-1">Sign in</h1>
-          <p className="text-sm text-stone-500 mb-6">Weekend Explorer Bengaluru</p>
+          <p className="text-sm text-stone-500 mb-6">Bangalore Weekend Explorer</p>
 
           <form onSubmit={handleLogin} className="space-y-4">
             <div>
