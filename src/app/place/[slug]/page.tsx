@@ -4,6 +4,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { MapPin, Navigation, ArrowLeft, ExternalLink, CheckCircle2, Clock } from 'lucide-react'
 import { createClient } from '@/lib/supabase/server'
+import { createClient as createDirectClient } from '@supabase/supabase-js'
 import { getCategoryMeta } from '@/lib/categories'
 import { buildShareUrl } from '@/lib/utils'
 import { FuelCalculator } from '@/components/location/FuelCalculator'
@@ -43,7 +44,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export async function generateStaticParams() {
-  const supabase = await createClient()
+  // Use a direct client here — cookies() is unavailable at build time
+  const supabase = createDirectClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+  )
   const { data } = await supabase.from('locations').select('slug')
   return (data ?? []).map(row => ({ slug: row.slug }))
 }
