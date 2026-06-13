@@ -1,0 +1,145 @@
+@import 'maplibre-gl/dist/maplibre-gl.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 20 14.3% 4.1%;
+    --foreground: 60 9.1% 97.8%;
+    --card: 20 14.3% 4.1%;
+    --card-foreground: 60 9.1% 97.8%;
+    --popover: 20 14.3% 4.1%;
+    --popover-foreground: 60 9.1% 97.8%;
+    --primary: 142.1 76.2% 36.3%;
+    --primary-foreground: 355.7 100% 97.3%;
+    --secondary: 12 6.5% 15.1%;
+    --secondary-foreground: 60 9.1% 97.8%;
+    --muted: 12 6.5% 15.1%;
+    --muted-foreground: 24 5.4% 63.9%;
+    --accent: 12 6.5% 15.1%;
+    --accent-foreground: 60 9.1% 97.8%;
+    --destructive: 0 72.2% 50.6%;
+    --destructive-foreground: 60 9.1% 97.8%;
+    --border: 12 6.5% 15.1%;
+    --input: 12 6.5% 15.1%;
+    --ring: 142.4 71.8% 29.2%;
+    --radius: 0.5rem;
+  }
+
+  .light {
+    --background: 0 0% 100%;
+    --foreground: 20 14.3% 4.1%;
+    --card: 0 0% 100%;
+    --card-foreground: 20 14.3% 4.1%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 20 14.3% 4.1%;
+    --primary: 142.1 76.2% 36.3%;
+    --primary-foreground: 355.7 100% 97.3%;
+    --secondary: 60 4.8% 95.9%;
+    --secondary-foreground: 24 9.8% 10%;
+    --muted: 60 4.8% 95.9%;
+    --muted-foreground: 25 5.3% 44.7%;
+    --accent: 60 4.8% 95.9%;
+    --accent-foreground: 24 9.8% 10%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 60 9.1% 97.8%;
+    --border: 20 5.9% 90%;
+    --input: 20 5.9% 90%;
+    --ring: 142.1 76.2% 36.3%;
+  }
+}
+
+@layer base {
+  * { @apply border-border; }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+/* ── Mapbox overrides ── */
+.maplibregl-ctrl-logo,
+.maplibregl-ctrl-attrib { display: none !important; }
+
+.maplibregl-canvas { outline: none; }
+
+.maplibregl-popup-content {
+  background: transparent !important;
+  padding: 0 !important;
+  box-shadow: none !important;
+}
+
+.maplibregl-popup-tip { display: none !important; }
+
+/* ── Custom scrollbar ── */
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: hsl(var(--muted-foreground) / 0.3); border-radius: 2px; }
+
+/* ── Map marker animations ── */
+@keyframes markerPulse {
+  0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(16,185,129,0.4); }
+  50% { transform: scale(1.05); box-shadow: 0 0 0 8px rgba(16,185,129,0); }
+}
+
+.marker-selected { animation: markerPulse 1.5s ease-in-out infinite; }
+
+/* ── Glass morphism ── */
+.glass {
+  background: rgba(12, 10, 9, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,0.06);
+}
+
+.glass-light {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(0,0,0,0.08);
+}
+
+/* ── Theme-aware surfaces (dark/light) ── */
+/* Frosted bar — NavBar, BottomBar, SearchRow */
+.surface-bar {
+  background: rgba(248, 245, 240, 0.96);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+.dark .surface-bar {
+  background: rgba(10, 11, 18, 0.97);
+}
+
+/* Solid overlay — drawers, panels, modals */
+.surface-overlay {
+  background: #f5f2ed;
+}
+.dark .surface-overlay {
+  background: #0a0b12;
+}
+
+/* Subtle card inside a panel */
+.surface-card {
+  background: rgba(0, 0, 0, 0.04);
+}
+.dark .surface-card {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+/* Primary text — respects theme */
+.t-primary   { color: #1c1917; } /* stone-900 */
+.dark .t-primary   { color: #f5f5f4; } /* stone-100 */
+.t-secondary { color: #57534e; } /* stone-600 */
+.dark .t-secondary { color: #a8a29e; } /* stone-400 */
+.t-muted     { color: #78716c; } /* stone-500 */
+.dark .t-muted     { color: #78716c; }
+
+/* ── Scrollbar hide ── */
+.scrollbar-none {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.scrollbar-none::-webkit-scrollbar { display: none; }
+

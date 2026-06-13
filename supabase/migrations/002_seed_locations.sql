@@ -1,0 +1,143 @@
+-- ─────────────────────────────────────────────────────────────────────────────
+-- Seed: 103 Locations around Bengaluru (with descriptions & coordinates)
+-- ─────────────────────────────────────────────────────────────────────────────
+
+INSERT INTO locations (name, slug, primary_category, all_categories, distance_km, latitude, longitude, google_maps_url, is_visited, description) VALUES
+
+-- FORTS
+('Uttari Betta',            'uttari-betta',            'fort',      ARRAY['fort','trek'],          120, 13.4910, 77.2906, 'https://maps.google.com/?q=Uttari+Betta+Karnataka', true,  'A twin-peaked rocky hill fort with stunning 360° panoramic views. The steep granite boulders and ancient fort ruins make it a favourite for trekkers and history buffs.'),
+('Rayakottai Fort',         'rayakottai-fort',         'fort',      ARRAY['fort','trek'],          70,  12.6581, 78.0842, 'https://maps.google.com/?q=Rayakottai+Fort+Karnataka', true,  'A hilltop fort straddling the Karnataka–Tamil Nadu border, known for its dramatic rocky terrain and sweeping plains views.'),
+('Bengaluru Fort',          'bengaluru-fort',          'fort',      ARRAY['fort'],                 18,  12.9634, 77.5755, 'https://maps.google.com/?q=Bengaluru+Fort', true,  'The historic stone fort built by Kempe Gowda I in 1537, later expanded by Hyder Ali and Tipu Sultan. A must-visit slice of Bengaluru''s layered history.'),
+('Channarayana Durga Fort', 'channarayana-durga-fort', 'fort',      ARRAY['fort','trek'],          120, 13.5910, 77.2143, 'https://maps.google.com/?q=Channarayana+Durga+Fort+Karnataka', true,  'One of Karnataka''s lesser-known gems — a rocky hilltop fort with ancient inscriptions and jaw-dropping valley views.'),
+('Gudibande Fort',          'gudibande-fort',          'fort',      ARRAY['fort','trek'],          106, 13.5230, 77.8047, 'https://maps.google.com/?q=Gudibande+Fort+Karnataka', true,  'A photogenic fort perched atop a granite hill, surrounded by serene farmlands. The climb rewards with an unobstructed skyline view.'),
+('Savandurga',              'savandurga',              'trek',      ARRAY['trek','fort'],          72,  12.9209, 77.0740, 'https://maps.google.com/?q=Savandurga+Karnataka', false, 'One of the largest monolithic rocks in Asia. The trek to the summit is exhilarating, with sheer granite faces and lush forest below.'),
+('Kuduru Bhairavadurga Betta','kuduru-bhairavadurga-betta','trek',  ARRAY['trek','fort'],          80,  12.9745, 77.0354, 'https://maps.google.com/?q=Kuduru+Bhairavadurga+Karnataka', false, 'A remote twin-peaked hill with a Bhairava shrine at the summit. The solitude and wild landscape feel worlds away from Bengaluru.'),
+('Huliyurdurga',            'huliyurdurga',            'trek',      ARRAY['trek','fort'],          130, 13.4690, 77.0134, 'https://maps.google.com/?q=Huliyurdurga+Karnataka', false, 'The "Tiger Fort" — a challenging trek through dense scrub and granite boulders to an ancient fortified hilltop.'),
+('Bollumalai Fort',         'bollumalai-fort',         'trek',      ARRAY['trek','temple'],        97,  13.4458, 77.9198, 'https://maps.google.com/?q=Bollumalai+Fort+Karnataka', false, 'A striking hill with a ruined fort and a small hilltop temple. The approach through scrub forest adds to the adventure.'),
+('Krishnagiri Fort',        'krishnagiri-fort',        'fort',      ARRAY['fort','trek'],          80,  12.5279, 78.2143, 'https://maps.google.com/?q=Krishnagiri+Fort+Tamil+Nadu', true,  'A well-preserved fort perched on a steep hill, sitting right on the Karnataka–Tamil Nadu border. Sunrise views are spectacular.'),
+('Kangundhi Fort',          'kangundhi-fort',          'fort',      ARRAY['fort','trek'],          100, 13.0342, 78.3302, 'https://maps.google.com/?q=Kangundhi+Fort+Karnataka', false, 'An off-the-beaten-path hilltop fort — raw, rugged, and rarely crowded. Ideal for history seekers and adventure photographers.'),
+('Udedurgam Fort',          'udedurgam-fort',          'fort',      ARRAY['fort'],                 65,  12.6943, 77.2967, 'https://maps.google.com/?q=Udedurgam+Fort+Karnataka', false, 'A crumbling fort on a rocky hill with minimal tourist footprint — a genuine hidden gem for solo explorers.'),
+('Ratnagiri',               'ratnagiri-fort',          'fort',      ARRAY['fort'],                 75,  13.0327, 77.3820, 'https://maps.google.com/?q=Ratnagiri+Hill+Tumkur+Karnataka', false, 'A gem-studded hill with fort ruins and a small temple.'),
+('Bhasmangi Betta',         'bhasmangi-betta',         'fort',      ARRAY['fort'],                 150, 13.5712, 76.9743, 'https://maps.google.com/?q=Bhasmangi+Betta+Karnataka', false, 'A remote and rarely visited hilltop fort deep in the Tumkur district. Raw wilderness, ancient walls, and zero crowds.'),
+('Kundana Betta Fort',      'kundana-betta-fort',      'trek',      ARRAY['trek'],                 50,  13.1143, 77.2106, 'https://maps.google.com/?q=Kundana+Betta+Fort+Karnataka', true,  'A lesser-explored hillock with fort ruins and bouldering potential. Perfect for a quick half-day escape from the city.'),
+
+-- TREKS / VIEW POINTS
+('Sholay Hills / Ramdevara Hill','sholay-hills','trek',ARRAY['trek'],75,13.0982,78.2276,'https://maps.google.com/?q=Sholay+Hills+Ramanagara+Karnataka',true,'The iconic rocky hills where the Bollywood classic Sholay was filmed. Stunning granite formations, rappelling opportunities, and cinematic landscapes.'),
+('Brahma Hills','brahma-hills','trek',ARRAY['trek','temple'],37,12.7243,77.8201,'https://maps.google.com/?q=Brahma+Hills+Karnataka',true,'A peaceful hillock with a Brahma shrine and panoramic countryside views. Especially beautiful at golden hour.'),
+('Yethiraja Swami Betta','yethiraja-swami-betta','trek',ARRAY['trek','temple'],79,13.3198,77.5634,'https://maps.google.com/?q=Yethiraja+Swami+Betta+Karnataka',true,'A hilltop with a revered shrine and commanding views of the Deccan plateau.'),
+('Mandaragiri Hill','mandaragiri-hill','trek',ARRAY['temple','trek'],80,13.2978,77.4412,'https://maps.google.com/?q=Mandaragiri+Hill+Karnataka',true,'A sacred Jain pilgrimage hill with a monolithic statue and ancient rock carvings.'),
+('Thimmappana Betta','thimmappana-betta','trek',ARRAY['trek'],83,13.2456,78.0843,'https://maps.google.com/?q=Thimmappana+Betta+Karnataka',true,'An underrated trekking spot with boulder-strewn trails and dense scrub forest. Great for early morning hikes.'),
+('Ragigudda Hill','ragigudda-hill','trek',ARRAY['trek','temple'],16,12.8987,77.6023,'https://maps.google.com/?q=Ragigudda+Hill+Bengaluru',false,'A rocky hillock within Bengaluru city with an ancient Anjaneya temple at the summit.'),
+('SRS Hills','srs-hills','trek',ARRAY['trek','temple'],90,13.3312,78.1423,'https://maps.google.com/?q=SRS+Hills+Karnataka',false,'A scenic cluster of hills with a hilltop temple and vast countryside vistas.'),
+('Anthragange','anthragange','trek',ARRAY['trek','temple'],69,13.0712,78.1876,'https://maps.google.com/?q=Anthragange+Kolar+Karnataka',false,'Ancient cave temple on a rocky hill — explore lava tube caves by torchlight and emerge to panoramic sunrise views.'),
+('Nandi Hills','nandi-hills','trek',ARRAY['trek'],60,13.3702,77.6835,'https://maps.google.com/?q=Nandi+Hills+Karnataka',false,'The jewel of weekend getaways from Bengaluru. Misty mornings, terraced gardens, a historic fort, and sunrises that redefine beauty.'),
+('Hulukadi Betta','hulukadi-betta','trek',ARRAY['trek','lake','temple'],88,13.3498,78.1243,'https://maps.google.com/?q=Hulukadi+Betta+Karnataka',false,'A triple-treat: trek through forest, a glittering lake at the base, and a hilltop temple.'),
+('Kaiwara Betta','kaiwara-betta','trek',ARRAY['trek'],66,13.4076,78.0132,'https://maps.google.com/?q=Kaiwara+Betta+Karnataka',false,'A peaceful pilgrimage hill with multiple caves, a waterfall, and ancient temples hidden among boulders.'),
+('Kunagalu Betta','kunagalu-betta','trek',ARRAY['trek'],80,13.2012,77.0312,'https://maps.google.com/?q=Kunagalu+Betta+Karnataka',false,'A raw trekking hill in Tumkur district with near-vertical rock faces and few visitors.'),
+('Horagina Betta','horagina-betta','trek',ARRAY['trek'],70,13.0876,77.0423,'https://maps.google.com/?q=Horagina+Betta+Karnataka',false,'Dense scrub forest trail leading to a breezy hilltop.'),
+('Muthurayaswamy Betta','muthurayaswamy-betta','trek',ARRAY['trek'],55,13.0712,77.1543,'https://maps.google.com/?q=Muthurayaswamy+Betta+Karnataka',false,'A short but steep climb to a hilltop shrine with views of nearby farmlands and reservoirs.'),
+('Channagiri Betta','channagiri-betta','trek',ARRAY['trek'],70,13.1312,77.1023,'https://maps.google.com/?q=Channagiri+Betta+Karnataka',false,'A rocky hilltop with a small temple and wide open plateau views.'),
+('Madhugiri Betta','madhugiri-betta','trek',ARRAY['trek'],143,13.6612,77.2123,'https://maps.google.com/?q=Madhugiri+Fort+Karnataka',false,'The second largest monolithic rock in the world. The summit trail is steep, exposed, and utterly breathtaking.'),
+('Kunti Betta','kunti-betta','trek',ARRAY['trek'],150,12.2212,76.6123,'https://maps.google.com/?q=Kunti+Betta+Karnataka',false,'Twin rocky peaks near Pandavapura with a mythological backstory and gorgeous views of the Cauvery plains.'),
+('Kabbaladurga','kabbaladurga','trek',ARRAY['trek'],95,13.0512,77.0723,'https://maps.google.com/?q=Kabbaladurga+Karnataka',true,'A fortress-topped hill surrounded by forest, with boulder-hopping trails and a thrilling summit scramble.'),
+('Chota Ladhak','chota-ladhak','trek',ARRAY['trek'],56,12.8512,77.9723,'https://maps.google.com/?q=Chota+Ladhak+Karnataka',true,'A lunar-like rocky landscape nicknamed "Mini Ladakh." Boulders, flat plains, and eerie rock formations.'),
+('Markendeshwara Betta','markendeshwara-betta','trek',ARRAY['trek','temple'],62,13.1012,77.7223,'https://maps.google.com/?q=Markendeshwara+Betta+Karnataka',true,'A hilltop with a Markandeshwara shrine nestled among ancient rocks. Short hike, serene atmosphere.'),
+('Makali Durga Betta','makali-durga-betta','trek',ARRAY['trek'],74,13.2312,77.3712,'https://maps.google.com/?q=Makali+Durga+Betta+Karnataka',false,'A granite hill with scattered ruins and open views of the Deccan plateau.'),
+('Revanasiddeshwara Betta','revanasiddeshwara-betta','trek',ARRAY['trek'],90,13.3112,77.1112,'https://maps.google.com/?q=Revanasiddeshwara+Betta+Karnataka',false,'A forested hill with a sacred cave shrine and bouldering routes.'),
+('Akkayamma Betta','akkayamma-betta','trek',ARRAY['trek'],40,12.7912,77.2712,'https://maps.google.com/?q=Akkayamma+Betta+Karnataka',false,'A small but scenic hillock close to Bengaluru — perfect for quick morning treks.'),
+('Dibbagiri (Aanebetta)','dibbagiri-aanebetta','trek',ARRAY['trek'],60,12.7612,77.8312,'https://maps.google.com/?q=Dibbagiri+Aanebetta+Karnataka',false,'A plateau-topped hill with grasslands and occasional elephant sightings.'),
+('Pandavara Betta','pandavara-betta','trek',ARRAY['trek'],90,13.2912,77.0512,'https://maps.google.com/?q=Pandavara+Betta+Karnataka',false,'A cluster of boulders and a hilltop associated with Pandava lore. Raw, wild, crowd-free.'),
+('Shri Krishnagiri Betta','shri-krishnagiri-betta','trek',ARRAY['trek'],90,12.8312,77.1812,'https://maps.google.com/?q=Shri+Krishnagiri+Betta+Karnataka',false,'A twin-peaked hill with a shrine and expansive agricultural plains below.'),
+('Kalavarahalli Betta','kalavarahalli-betta','trek',ARRAY['trek'],75,13.2412,77.7712,'https://maps.google.com/?q=Kalavarahalli+Betta+Karnataka',false,'A lesser-known trekking hill in Chikkaballapur with open summit views.'),
+('Avalabetta Top View','avalabetta-top-view','trek',ARRAY['trek'],100,13.6212,77.6612,'https://maps.google.com/?q=Avalabetta+Karnataka',true,'A flat-topped plateau with 360° views and a small hilltop temple.'),
+('Avani Betta','avani-betta','trek',ARRAY['trek'],90,13.1612,78.1512,'https://maps.google.com/?q=Avani+Betta+Kolar+Karnataka',false,'A rocky hill with historical and mythological significance near Kolar.'),
+('Kailasagiri Hill','kailasagiri-hill','trek',ARRAY['temple','trek'],80,13.0312,78.2512,'https://maps.google.com/?q=Kailasagiri+Hill+Karnataka',false,'A pilgrimage hill with a Shiva shrine and scenic plateau walk.'),
+('Elephant Watch Tower Samieri','elephant-watch-tower','trek',ARRAY['trek','nature','lake'],75,12.3912,76.6612,'https://maps.google.com/?q=Elephant+Watch+Tower+Samieri+Karnataka',true,'A wildlife watch tower inside a forest reserve near Mysore. Spot wild elephants and peacocks at dusk.'),
+('Halu Chilume Gange','halu-chilume-gange','trek',ARRAY['trek'],60,13.0612,77.2012,'https://maps.google.com/?q=Halu+Chilume+Gange+Karnataka',false,'A natural spring hidden in a boulder-strewn hillside.'),
+('Acchalu Betta','acchalu-betta','trek',ARRAY['trek'],80,13.0312,77.0312,'https://maps.google.com/?q=Acchalu+Betta+Karnataka',false,'An uncrowded trekking hill near Tumkur with a rock-cut cave and hilltop views.'),
+('Jakkalamadagu View Point','jakkalamadagu-view-point','lake',ARRAY['lake'],70,13.1412,78.1812,'https://maps.google.com/?q=Jakkalamadagu+View+Point+Karnataka',false,'A stunning reservoir viewpoint with turquoise waters backed by rocky hills.'),
+
+-- WATERFALLS
+('Chunchi Falls','chunchi-falls','waterfall',ARRAY['waterfall'],100,12.2132,77.2734,'https://maps.google.com/?q=Chunchi+Falls+Karnataka',true,'A powerful twin waterfall on the Arkavathi river, thundering into a deep rocky gorge.'),
+('Muthyalamaduvvu Waterfalls','muthyalamaduvvu-waterfalls','waterfall',ARRAY['waterfall','park','boating'],39,12.6512,77.6412,'https://maps.google.com/?q=Muthyalamaduvvu+Waterfalls+Karnataka',true,'A series of cascading falls with a boating lake and picnic grounds.'),
+('Bharachukki Waterfalls','bharachukki-waterfalls','waterfall',ARRAY['waterfall'],156,12.4212,77.1623,'https://maps.google.com/?q=Bharachukki+Waterfalls+Karnataka',true,'Part of the Shivanasamudra falls system — wide, powerful, and mist-soaked.'),
+
+-- LAKES & DAMS
+('Vatadahosahali Lake','vatadahosahali-lake','lake',ARRAY['lake'],115,13.5612,77.4823,'https://maps.google.com/?q=Vatadahosahali+Lake+Karnataka',true,'A remote and beautiful lake surrounded by rocky hills. Pristine birdwatching.'),
+('Mekadattu','mekadattu','lake',ARRAY['lake'],105,12.1523,77.1234,'https://maps.google.com/?q=Mekadattu+Karnataka',true,'The legendary "Goat''s Leap" — a narrow gorge where the Cauvery surges through ancient rocks.'),
+('Manchanabele','manchanabele','lake',ARRAY['lake'],60,12.9412,77.1423,'https://maps.google.com/?q=Manchanabele+Reservoir+Karnataka',true,'A peaceful reservoir with kayaking, cycling trails, and open-air campsites.'),
+('Yediyur Lake','yediyur-lake','lake',ARRAY['lake','boating'],17,12.9312,77.5623,'https://maps.google.com/?q=Yediyur+Lake+Bengaluru',true,'A calm urban lake with boating facilities. Beloved at sunset.'),
+('Dandiganahalli Dam Reservoir','dandiganahalli-dam-reservoir','lake',ARRAY['lake'],100,13.0512,78.0423,'https://maps.google.com/?q=Dandiganahalli+Dam+Reservoir+Karnataka',true,'Sunrise here is extraordinary — the sky reflects perfectly on calm water.'),
+('DD Hills','dd-hills','lake',ARRAY['lake','temple','trek'],115,13.6312,77.4312,'https://maps.google.com/?q=DD+Hills+Karnataka',true,'Reservoir, hilltop temple, and trekking trail all in one popular weekend circuit.'),
+('Ambaji Durga','ambaji-durga','lake',ARRAY['lake','trek'],80,12.9712,77.0423,'https://maps.google.com/?q=Ambaji+Durga+Karnataka',true,'A reservoir with a rocky island-temple accessible by small boats.'),
+('Avati Hills & Lake','avati-hills-lake','trek',ARRAY['trek','lake'],60,12.9912,77.0712,'https://maps.google.com/?q=Avati+Hills+Lake+Karnataka',true,'Gentle hills overlooking a tranquil lake. Great for bird photography and sunset.'),
+('Shettihali Church','shettihali-church','lake',ARRAY['lake'],220,13.7712,75.5023,'https://maps.google.com/?q=Shettihali+Church+Karnataka',true,'A hauntingly beautiful submerged Gothic church that emerges from the Tunga reservoir during summer.'),
+('Kelavarapalli Dam','kelavarapalli-dam','lake',ARRAY['lake'],35,12.7212,77.9623,'https://maps.google.com/?q=Kelavarapalli+Dam+Karnataka',true,'A scenic dam popular for early morning drives and birding walks.'),
+('Kanva Reservoir','kanva-reservoir','lake',ARRAY['lake'],70,13.1112,77.2212,'https://maps.google.com/?q=Kanva+Reservoir+Karnataka',false,'A serene reservoir surrounded by eucalyptus forests. Excellent for camping and boating.'),
+('Mydala Lake','mydala-lake','lake',ARRAY['lake'],70,13.1412,77.2312,'https://maps.google.com/?q=Mydala+Lake+Karnataka',true,'A picturesque lake with a forested backdrop and good birding.'),
+('Gopinatham Dam','gopinatham-dam','lake',ARRAY['lake'],222,12.2212,77.7312,'https://maps.google.com/?q=Gopinatham+Dam+Karnataka',false,'A remote reservoir deep in the Biligiri Rangana Hills.'),
+('Krishnagiri Reservoir','krishnagiri-reservoir','lake',ARRAY['lake'],100,12.5212,78.2023,'https://maps.google.com/?q=Krishnagiri+Reservoir+Tamil+Nadu',true,'A large reservoir straddling Karnataka and Tamil Nadu, surrounded by rocky hills.'),
+('Tom Bridge','tom-bridge','lake',ARRAY['lake'],190,13.0712,75.7423,'https://maps.google.com/?q=Tom+Bridge+Karnataka',false,'A colonial-era stone arch bridge in the Western Ghats foothills.'),
+('Hesaraghatta Lake','hesaraghatta-lake','lake',ARRAY['lake'],35,13.1312,77.4023,'https://maps.google.com/?q=Hesaraghatta+Lake+Bengaluru',true,'One of Bengaluru''s original reservoirs and a top birding destination.'),
+('Kaikondrahalli Lake','kaikondrahalli-lake','lake',ARRAY['lake'],20,12.9112,77.6423,'https://maps.google.com/?q=Kaikondrahalli+Lake+Bengaluru',true,'A beautifully restored urban lake with walking trails and a butterfly garden.'),
+('Dore Kere Lake','dore-kere-lake','lake',ARRAY['lake'],25,12.9012,77.5912,'https://maps.google.com/?q=Dore+Kere+Lake+Bengaluru',false,'A restored heritage lake with seasonal lotus blooms.'),
+('Muninagara Dam','muninagara-dam','lake',ARRAY['lake'],70,13.1212,77.1512,'https://maps.google.com/?q=Muninagara+Dam+Karnataka',false,'A quiet dam ideal for cycling tours and picnic outings.'),
+('Mavathur Dam','mavathur-dam','lake',ARRAY['lake'],50,12.7412,77.2712,'https://maps.google.com/?q=Mavathur+Dam+Karnataka',true,'A little-known dam with calm backwaters and a forest backdrop.'),
+('Maralwadi Dam','maralwadi-dam','lake',ARRAY['lake'],70,13.1112,77.2512,'https://maps.google.com/?q=Maralwadi+Dam+Karnataka',false,'A scenic dam surrounded by agricultural land and rocky outcrops.'),
+
+-- MUSEUMS
+('Tipu Sultan''s Summer Palace','tipu-sultans-summer-palace','museum',ARRAY['museum'],17,12.9591,77.5756,'https://maps.google.com/?q=Tipu+Sultan+Summer+Palace+Bengaluru',true,'An exquisite example of Indo-Islamic architecture, once Tipu Sultan''s seasonal retreat.'),
+('HAL Museum','hal-museum','museum',ARRAY['museum'],7,12.9523,77.6639,'https://maps.google.com/?q=HAL+Heritage+Centre+Museum+Bengaluru',true,'Vintage fighter jets, helicopters, and Indian aerospace history on display.'),
+('Visvesvaraya Museum','visvesvaraya-museum','museum',ARRAY['museum'],18,12.9763,77.5930,'https://maps.google.com/?q=Visvesvaraya+Industrial+Museum+Bengaluru',true,'India''s premier science and technology museum.'),
+('HMT Museum','hmt-museum','museum',ARRAY['museum'],27,13.0200,77.5100,'https://maps.google.com/?q=HMT+Museum+Bengaluru',true,'Fascinating museum charting the history of India''s legendary watch brand.'),
+('Payana Car Museum','payana-car-museum','museum',ARRAY['museum'],160,12.4412,76.8312,'https://maps.google.com/?q=Payana+Car+Museum+Karnataka',true,'Rare vintage cars, motorcycles, and antique vehicles. A petrolhead''s paradise near Mysore.'),
+('Bangalore Palace','bangalore-palace','museum',ARRAY['museum'],25,12.9985,77.5920,'https://maps.google.com/?q=Bangalore+Palace',true,'A grand Tudor-inspired palace with ornate halls and manicured grounds.'),
+('National Gallery of Modern Art','national-gallery-modern-art','museum',ARRAY['museum'],17,12.9712,77.5912,'https://maps.google.com/?q=National+Gallery+Modern+Art+Bengaluru',true,'Rich collection of Indian modern and contemporary art in a stunning garden setting.'),
+('Indian Music Experience','indian-music-experience','museum',ARRAY['museum'],17,13.0012,77.6312,'https://maps.google.com/?q=Indian+Music+Experience+Bengaluru',false,'Asia''s first interactive music museum.'),
+
+-- TEMPLES
+('Lepakshi Temple','lepakshi-temple','temple',ARRAY['temple'],140,13.8023,77.6123,'https://maps.google.com/?q=Lepakshi+Temple+Andhra+Pradesh',true,'A stunning 16th-century Vijayanagara temple famous for its hanging pillar and vivid ceiling murals.'),
+('Shivgange','shivgange','temple',ARRAY['temple','trek'],69,13.1112,77.2712,'https://maps.google.com/?q=Shivgange+Karnataka',true,'A rocky hill with a Shiva shrine and natural waterfall. Steps and boulder scrambling to the top.'),
+('Omkar Hills','omkar-hills','temple',ARRAY['temple'],30,12.8812,77.5612,'https://maps.google.com/?q=Omkar+Hills+Bengaluru',true,'A serene hilltop meditation centre and temple with lovely gardens.'),
+('Shrungagiri Sri Shanmukha Swami','shrungagiri-temple','temple',ARRAY['temple'],24,13.3712,77.6912,'https://maps.google.com/?q=Shrungagiri+Shanmukha+Swami+Temple+Karnataka',false,'A hilltop temple complex with a grand gopuram and peaceful pathways.'),
+('Bala Kondarayana Swamy Temple Hills','bala-kondarayana-temple','temple',ARRAY['temple','fort','trek'],70,13.2612,77.8423,'https://maps.google.com/?q=Bala+Kondarayana+Swamy+Temple+Hills+Karnataka',false,'Hilltop temple complex with a small fort and panoramic views.'),
+
+-- NATURE / FORESTS
+('Turahalli Forest','turahalli-forest','nature',ARRAY['nature'],24,12.8712,77.5123,'https://maps.google.com/?q=Turahalli+Forest+Bengaluru',true,'Bengaluru''s last remaining city forest — a mountain biking paradise.'),
+('Bannerghatta Zoo','bannerghatta-zoo','nature',ARRAY['nature','boating'],32,12.8023,77.5712,'https://maps.google.com/?q=Bannerghatta+Biological+Park',true,'A vast biological park with lion and tiger safari, butterfly park, and jungle boat safari.'),
+('Ranganathittu Bird Sanctuary','ranganathittu-bird-sanctuary','nature',ARRAY['nature'],155,12.4212,76.6823,'https://maps.google.com/?q=Ranganathittu+Bird+Sanctuary+Karnataka',true,'Karnataka''s oldest bird sanctuary — a river island paradise for storks, cormorants, and river otters.'),
+('B.R. Hills','br-hills','nature',ARRAY['nature'],185,12.1512,77.0512,'https://maps.google.com/?q=Biligiri+Rangana+Hills+Karnataka',false,'A biodiversity hotspot at the confluence of the Western and Eastern Ghats.'),
+('Mallapa Konda','mallapa-konda','nature',ARRAY['nature'],90,13.3012,77.0812,'https://maps.google.com/?q=Mallapa+Konda+Karnataka',false,'A forested hill with nature trail and hilltop viewpoint.'),
+
+-- PARKS / CHILL SPOTS
+('Lalbagh Park','lalbagh-park','park',ARRAY['park'],15,12.9507,77.5848,'https://maps.google.com/?q=Lalbagh+Botanical+Garden+Bengaluru',true,'Bengaluru''s iconic 240-acre botanical garden with ancient trees and a Victorian glasshouse.'),
+('Jarakabande Oxygen Park','jarakabande-oxygen-park','park',ARRAY['park'],37,13.1012,77.5812,'https://maps.google.com/?q=Jarakabande+Oxygen+Park+Bengaluru',true,'A large forested park on the city''s northern edge. Popular for morning walks and cycling.'),
+('Jatayu Theme Park','jatayu-theme-park','park',ARRAY['park'],130,12.3512,77.3012,'https://maps.google.com/?q=Jatayu+Theme+Park+Karnataka',true,'A mythological theme park inspired by the Ramayana with dramatic rock sculptures.'),
+('National Military Memorial Park','national-military-memorial','park',ARRAY['park'],17,12.9712,77.5812,'https://maps.google.com/?q=National+Military+Memorial+Park+Bengaluru',true,'A dignified memorial park honoring India''s fallen soldiers.'),
+('Jayamahal Park','jayamahal-park','park',ARRAY['park'],20,13.0112,77.6012,'https://maps.google.com/?q=Jayamahal+Park+Bengaluru',false,'A tranquil heritage garden with tall trees and colonial-era paths.'),
+('Kadugodi Tree Park','kadugodi-tree-park','park',ARRAY['park'],12,13.0012,77.7612,'https://maps.google.com/?q=Kadugodi+Tree+Park+Bengaluru',true,'A dense urban forest park in east Bengaluru with resident peacocks.'),
+
+-- PALACE
+('Mysore Palace','mysore-palace','palace',ARRAY['palace'],166,12.3052,76.6552,'https://maps.google.com/?q=Mysore+Palace+Karnataka',true,'One of India''s most visited monuments — blazes with ten thousand lights on Sunday nights.'),
+
+-- CAMPUSES
+('IIM Bangalore','iim-bangalore','campus',ARRAY['campus'],15,12.9323,77.5323,'https://maps.google.com/?q=IIM+Bangalore',true,'Lush greenery, heritage buildings, and a serene lake on one of India''s finest campuses.'),
+('IISC Bangalore','iisc-bangalore','campus',ARRAY['campus'],28,13.0212,77.5712,'https://maps.google.com/?q=IISC+Bangalore',false,'India''s premier research institution with a sprawling green campus and natural forest.'),
+
+-- CAFES
+('Citrus Cafe','citrus-cafe','cafe',ARRAY['cafe','nature'],35,12.8912,77.1912,'https://maps.google.com/?q=Citrus+Cafe+Karnataka',true,'A beautiful farm-to-table cafe set in an orange and citrus orchard.'),
+('Rasta Cafe','rasta-cafe','cafe',ARRAY['cafe'],70,13.1612,77.2312,'https://maps.google.com/?q=Rasta+Cafe+Mysore+Road+Karnataka',false,'The legendary highway diner on Mysore Road — the unofficial start of every South Karnataka road trip.')
+
+ON CONFLICT (slug) DO NOTHING;
+
+-- ─── Seed: Default Collections ────────────────────────────────────────────────
+INSERT INTO collections (name, slug, description, is_public) VALUES
+  ('Best Sunrise Spots',  'best-sunrise-spots',  'Wake up early and be rewarded. These locations offer the most magical sunrise views around Bengaluru.', true),
+  ('Epic Treks',          'epic-treks',          'From beginner scrambles to challenging summit pushes — the best trekking destinations within a tank of petrol.', true),
+  ('Hidden Gems',         'hidden-gems',         'Off the tourist trail and away from the crowds. These spots reward the adventurous explorer.', true),
+  ('Waterfall Chaser',    'waterfall-chaser',    'Chase the roar of falling water. Best visited right after the monsoon when the falls are at full fury.', true),
+  ('Scenic Rides',        'scenic-rides',        'Curated routes for motorcycle riders — open roads, dramatic landscapes, and legendary cafes.', true),
+  ('Forts & History',     'forts-and-history',   'Step inside Karnataka''s rich history. These hilltop forts held kingdoms, witnessed battles, and now offer views.', true),
+  ('Nature Escapes',      'nature-escapes',      'Forest retreats, wildlife sanctuaries, and peaceful lakes for when the city gets too loud.', true),
+  ('Weekend Overnights',  'weekend-overnights',  'Far enough to feel like a proper escape, close enough to do in a weekend.', true)
+ON CONFLICT (slug) DO NOTHING;
