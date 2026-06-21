@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { Compass } from 'lucide-react'
 import type { OnboardingInterest } from '@/lib/hooks/useOnboarding'
 import { useTimeTheme } from '@/lib/hooks/useTimeTheme'
+import { track } from '@/lib/analytics'
 
 const INTERESTS: { id: OnboardingInterest; emoji: string; label: string; sub: string }[] = [
   { id: 'trek',        emoji: '⛰️', label: 'Trek',          sub: 'Trails & summits' },
@@ -27,18 +28,25 @@ interface Props {
   onComplete: (interest: OnboardingInterest, maxDistance: number) => void
 }
 
-export function OnboardingModal({ onComplete }: Props) {
+export function OnboardingModal({ onComplete, trigger = 'first_visit' }: Props & { trigger?: 'first_visit' | 'refine' }) {
   const theme = useTimeTheme()
   const [step, setStep] = useState<1 | 2>(1)
   const [interest, setInterest] = useState<OnboardingInterest | null>(null)
 
+  // Track modal shown once on mount
+  useState(() => {
+    track('onboarding_shown', { trigger })
+  })
+
   const handleInterest = (id: OnboardingInterest) => {
+    track('onboarding_interest_selected', { interest: id })
     setInterest(id)
     setTimeout(() => setStep(2), 160)
   }
 
   const handleDistance = (value: number) => {
     if (!interest) return
+    track('onboarding_completed', { interest, max_distance_km: value })
     onComplete(interest, value)
   }
 

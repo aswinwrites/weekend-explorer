@@ -11,6 +11,7 @@ import { ShareButtons } from './ShareButtons'
 import { CategoryBadge } from './CategoryBadge'
 import { travelTimeLabel, bestFor, bestTime, tripType, fuelEstimate } from '@/lib/trip-meta'
 import { useTimeTheme } from '@/lib/hooks/useTimeTheme'
+import { track } from '@/lib/analytics'
 
 // Haversine distance in km
 function haversine(lat1: number, lng1: number, lat2: number, lng2: number) {
@@ -153,7 +154,14 @@ function PanelContent({
           <div className="flex items-start justify-between gap-2">
             <h2 className="text-xl font-bold t-primary leading-tight">{location.name}</h2>
             <button
-              onClick={onToggleSave}
+              onClick={() => {
+                track('place_saved', {
+                  place_name: location.name,
+                  place_category: location.primary_category,
+                  action: isSaved ? 'unsaved' : 'saved',
+                })
+                onToggleSave()
+              }}
               className={cn(
                 'flex-shrink-0 w-9 h-9 rounded-xl flex items-center justify-center transition-all',
                 !isSaved && 'bg-white/5 text-stone-400 hover:bg-white/10 hover:text-white',
@@ -219,6 +227,7 @@ function PanelContent({
           <a
             href={location.google_maps_url ?? `https://maps.google.com/?q=${encodeURIComponent(location.name)}`}
             target="_blank" rel="noopener noreferrer"
+            onClick={() => track('place_maps_opened', { place_name: location.name, place_category: location.primary_category })}
             className="flex-1 flex items-center justify-center gap-2 py-2.5 rounded-xl text-white text-sm font-medium transition-all"
             style={{ backgroundColor: theme.accent }}
           >
@@ -226,6 +235,7 @@ function PanelContent({
           </a>
           <a
             href={`/place/${location.slug}`}
+            onClick={() => track('place_detail_page_opened', { place_name: location.name, place_category: location.primary_category })}
             className="flex items-center justify-center px-3 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-stone-300 text-sm transition-colors"
           >
             <ExternalLink className="w-4 h-4" />
@@ -247,7 +257,14 @@ function PanelContent({
                 return (
                   <button
                     key={loc.id}
-                    onClick={() => onSelectNearby(loc)}
+                    onClick={() => {
+                      track('nearby_place_clicked', {
+                        from_place: location.name,
+                        to_place: loc.name,
+                        nearby_distance_km: Math.round(loc.dist),
+                      })
+                      onSelectNearby(loc)
+                    }}
                     className="flex items-center gap-3 p-3 rounded-xl bg-white/4 hover:bg-white/8 transition-colors text-left group"
                   >
                     <div

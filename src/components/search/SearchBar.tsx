@@ -1,10 +1,11 @@
 'use client'
-import { useState, useRef, useCallback } from 'react'
+import { useState, useRef, useCallback, useEffect } from 'react'
 import { Search, X } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import type { Location } from '@/types'
 import { getCategoryMeta } from '@/lib/categories'
 import { cn } from '@/lib/utils'
+import { track } from '@/lib/analytics'
 
 interface Props {
   locations: Location[]
@@ -24,12 +25,26 @@ export function SearchBar({ locations, value, onChange, onSelect }: Props) {
       ).slice(0, 8)
     : []
 
+  // Fire search_performed when results are shown (debounced via the results render)
+  useEffect(() => {
+    if (value.trim().length < 2 || results.length === 0) return
+    const t = setTimeout(() => {
+      track('search_performed', { query: value.trim(), results_count: results.length })
+    }, 600)
+    return () => clearTimeout(t)
+  }, [value, results.length]) // eslint-disable-line react-hooks/exhaustive-deps
+
   const handleSelect = useCallback((loc: Location) => {
+    track('search_result_selected', {
+      query: value.trim(),
+      place_name: loc.name,
+      place_category: loc.primary_category,
+    })
     onChange('')
     setFocused(false)
     onSelect(loc)
     inputRef.current?.blur()
-  }, [onChange, onSelect])
+  }, [value, onChange, onSelect])
 
   return (
     <div className="relative">

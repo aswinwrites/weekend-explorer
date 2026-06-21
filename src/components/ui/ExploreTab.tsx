@@ -7,6 +7,7 @@ import type { Location } from '@/types'
 import { travelTimeLabel } from '@/lib/trip-meta'
 import { useTimeTheme } from '@/lib/hooks/useTimeTheme'
 import { CategoryBadge } from '@/components/location/CategoryBadge'
+import { track } from '@/lib/analytics'
 
 const PLACEHOLDER = 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&q=70'
 
@@ -122,7 +123,17 @@ export function ExploreTab({ open, allLocations, onClose, onSelect }: Props) {
                     {section.locations.map(loc => (
                       <button
                         key={loc.id}
-                        onClick={() => { onSelect(loc); onClose() }}
+                        onClick={() => {
+                          track('place_selected', {
+                            place_name: loc.name,
+                            place_category: loc.primary_category,
+                            distance_km: loc.distance_km,
+                            is_featured: loc.is_featured,
+                            source: 'explore_tab',
+                          })
+                          onSelect(loc)
+                          onClose()
+                        }}
                         className="flex-shrink-0 w-36 rounded-xl overflow-hidden text-left transition-all duration-200 hover:scale-[1.02] border border-white/6 hover:border-white/14"
                         style={{ background: 'rgba(255,255,255,0.05)' }}
                       >

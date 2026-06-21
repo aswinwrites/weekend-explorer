@@ -5,6 +5,7 @@ import type { FilterState, Category } from '@/types'
 import { ALL_CATEGORIES, getCategoryMeta } from '@/lib/categories'
 import { useTimeTheme } from '@/lib/hooks/useTimeTheme'
 import { cn } from '@/lib/utils'
+import { track } from '@/lib/analytics'
 
 const CATEGORY_EMOJI: Record<string, string> = {
   trek: '⛰️', waterfall: '💦', fort: '🏰', lake: '🏞️',
@@ -31,16 +32,25 @@ export function FilterDrawer({ open, filter, onChange, onClose }: Props) {
   const theme = useTimeTheme()
 
   const toggleCategory = (slug: Category) => {
-    const next = filter.categories.includes(slug)
+    const removing = filter.categories.includes(slug)
+    const next = removing
       ? filter.categories.filter(c => c !== slug)
       : [...filter.categories, slug]
+    track('filter_category_toggled', {
+      category: slug,
+      action: removing ? 'removed' : 'added',
+      active_category_count: next.length,
+    })
     onChange({ categories: next })
   }
 
   const activeCount = filter.categories.length +
     (filter.distance[0] > 0 || filter.distance[1] < 300 ? 1 : 0)
 
-  const reset = () => onChange({ categories: [], distance: [0, 300] })
+  const reset = () => {
+    track('filter_reset', {})
+    onChange({ categories: [], distance: [0, 300] })
+  }
 
   return (
     <AnimatePresence>
@@ -132,7 +142,16 @@ export function FilterDrawer({ open, filter, onChange, onClose }: Props) {
                     return (
                       <button
                         key={opt.label}
-                        onClick={() => onChange({ distance: active ? [0, 300] : opt.value })}
+                        onClick={() => {
+                        if (!active) {
+                          track('filter_distance_changed', {
+                            distance_label: opt.label,
+                            distance_min: opt.value[0],
+                            distance_max: opt.value[1],
+                          })
+                        }
+                        onChange({ distance: active ? [0, 300] : opt.value })
+                      }}
                         className="flex items-center justify-between px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-150 border"
                         style={active ? {
                           backgroundColor: theme.accent + '20',

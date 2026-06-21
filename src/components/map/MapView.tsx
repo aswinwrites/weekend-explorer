@@ -5,6 +5,7 @@ import type { Location } from '@/types'
 import { getCategoryMeta } from '@/lib/categories'
 import { createRoot } from 'react-dom/client'
 import { MapMarker } from './MapMarker'
+import { track } from '@/lib/analytics'
 
 const BENGALURU = { lng: 77.5946, lat: 12.9716 }
 const DEFAULT_ZOOM = 9
@@ -94,6 +95,17 @@ export default function MapView({ locations, selected, flyTo, onSelectLocation, 
     displayed.forEach(loc => {
       const isSelected = selected?.id === loc.id
 
+      const handleMarkerClick = () => {
+        track('place_selected', {
+          place_name: loc.name,
+          place_category: loc.primary_category,
+          distance_km: loc.distance_km,
+          is_featured: loc.is_featured,
+          source: 'map_marker',
+        })
+        onSelectLocation(loc)
+      }
+
       if (markersRef.current.has(loc.id)) {
         // Re-render existing to update selected/featured state
         const { root } = markersRef.current.get(loc.id)!
@@ -103,7 +115,7 @@ export default function MapView({ locations, selected, flyTo, onSelectLocation, 
             isSelected={isSelected}
             isFeatured={loc.is_featured}
             name={loc.name}
-            onClick={() => onSelectLocation(loc)}
+            onClick={handleMarkerClick}
           />
         )
         return
@@ -117,7 +129,8 @@ export default function MapView({ locations, selected, flyTo, onSelectLocation, 
           category={loc.primary_category}
           isSelected={isSelected}
           isFeatured={loc.is_featured}
-          onClick={() => onSelectLocation(loc)}
+          name={loc.name}
+          onClick={handleMarkerClick}
         />
       )
       const marker = new maplibregl.Marker({ element: el, anchor: 'center' })

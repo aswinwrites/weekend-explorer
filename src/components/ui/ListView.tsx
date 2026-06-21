@@ -6,6 +6,7 @@ import type { Location } from '@/types'
 import { CategoryBadge } from '@/components/location/CategoryBadge'
 import { travelTimeLabel, fuelEstimate } from '@/lib/trip-meta'
 import { useTimeTheme } from '@/lib/hooks/useTimeTheme'
+import { track } from '@/lib/analytics'
 
 const PLACEHOLDER = 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&q=70'
 
@@ -40,7 +41,16 @@ export function ListView({ locations, onSelect, isSaved }: Props) {
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: Math.min(i * 0.03, 0.4) }}
-              onClick={() => onSelect(loc)}
+              onClick={() => {
+                track('place_selected', {
+                  place_name: loc.name,
+                  place_category: loc.primary_category,
+                  distance_km: loc.distance_km,
+                  is_featured: loc.is_featured,
+                  source: 'list_card',
+                })
+                onSelect(loc)
+              }}
               className="flex flex-col rounded-2xl overflow-hidden text-left transition-all duration-200 group border border-white/6 hover:border-white/12"
               style={{ background: 'rgba(255,255,255,0.04)' }}
             >

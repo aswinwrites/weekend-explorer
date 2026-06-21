@@ -1,6 +1,7 @@
 'use client'
 import { useState } from 'react'
 import { Copy, Check, Share2 } from 'lucide-react'
+import { track } from '@/lib/analytics'
 
 interface Props {
   url: string
@@ -34,6 +35,7 @@ export function ShareButtons({ url, name }: Props) {
   const copyLink = async () => {
     try {
       await navigator.clipboard.writeText(url)
+      track('place_shared', { place_name: name, platform: 'copy_link' })
       setCopied(true)
       setTimeout(() => setCopied(false), 2000)
     } catch {
@@ -44,18 +46,21 @@ export function ShareButtons({ url, name }: Props) {
   const shares = [
     {
       label: 'WhatsApp',
+      platform: 'whatsapp' as const,
       Icon: WHATSAPP_ICON,
       href: `https://wa.me/?text=${encodedText}%20${encodedUrl}`,
       color: 'hover:bg-[#25D366]/20 hover:text-[#25D366]',
     },
     {
       label: 'Telegram',
+      platform: 'telegram' as const,
       Icon: TELEGRAM_ICON,
       href: `https://t.me/share/url?url=${encodedUrl}&text=${encodedText}`,
       color: 'hover:bg-[#0088cc]/20 hover:text-[#0088cc]',
     },
     {
       label: 'X',
+      platform: 'x' as const,
       Icon: X_ICON,
       href: `https://x.com/intent/tweet?text=${encodedText}&url=${encodedUrl}`,
       color: 'hover:bg-white/10 hover:text-white',
@@ -75,6 +80,7 @@ export function ShareButtons({ url, name }: Props) {
             href={s.href}
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() => track('place_shared', { place_name: name, platform: s.platform })}
             className={`flex-1 flex items-center justify-center gap-1.5 py-2 rounded-xl bg-white/5 text-stone-400 text-xs font-medium transition-colors ${s.color}`}
           >
             <s.Icon />

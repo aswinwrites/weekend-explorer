@@ -16,6 +16,7 @@ import { useSavedList } from '@/lib/hooks/useSavedList'
 import { useOnboarding, INTEREST_CATEGORIES } from '@/lib/hooks/useOnboarding'
 import { useTimeTheme } from '@/lib/hooks/useTimeTheme'
 import { cn } from '@/lib/utils'
+import { track } from '@/lib/analytics'
 
 const MapView = dynamic(() => import('./MapView'), {
   ssr: false,
@@ -52,7 +53,9 @@ export function MapExplorer({ initialLocations }: Props) {
   const [exploreOpen, setExploreOpen] = useState(false)
   const [viewMode, setViewMode] = useState<ViewMode>('map')
   const { savedIds, toggle, isSaved, count: savedCount } = useSavedList()
-  const { showModal, complete: completeOnboarding, reopen: reopenOnboarding } = useOnboarding()
+  const { showModal, prefs, complete: completeOnboarding, reopen: reopenOnboarding } = useOnboarding()
+  // Track whether current modal open is first visit or a refine-triggered reopen
+  const onboardingTrigger = prefs.interest ? 'refine' : 'first_visit'
 
   const filteredLocations = useMemo(() => {
     return initialLocations.filter(loc => {
@@ -84,7 +87,9 @@ export function MapExplorer({ initialLocations }: Props) {
   const handleSurprise = useCallback(() => {
     if (filteredLocations.length === 0) return
     const idx = Math.floor(Math.random() * filteredLocations.length)
-    handleSelectLocation(filteredLocations[idx])
+    const loc = filteredLocations[idx]
+    track('surprise_clicked', { place_name: loc.name, place_category: loc.primary_category })
+    handleSelectLocation(loc)
   }, [filteredLocations, handleSelectLocation])
 
   const handleFilterChange = useCallback((next: Partial<FilterState>) => {
@@ -116,7 +121,13 @@ export function MapExplorer({ initialLocations }: Props) {
       />
 
       {/* NavBar */}
-      <NavBar savedCount={savedCount} onOpenSaved={() => setShowSaved(true)} />
+      <NavBar
+        savedCount={savedCount}
+        onOpenSaved={() => {
+          track('saved_list_opened', { saved_count: savedCount })
+          setShowSaved(true)
+        }}
+      />
 
       {/* ── Search + controls row ── */}
       <div
@@ -134,7 +145,13 @@ export function MapExplorer({ initialLocations }: Props) {
         </div>
 
         {/* Filters button */}
-        <FilterButton onClick={() => setFilterDrawerOpen(true)} activeCount={activeFilterCount} />
+        <FilterButton
+          onClick={() => {
+            track('filter_drawer_opened', { active_filter_count: activeFilterCount })
+            setFilterDrawerOpen(true)
+          }}
+          activeCount={activeFilterCount}
+        />
 
         {/* Spacer */}
         <div className="flex-1" />
@@ -144,7 +161,12 @@ export function MapExplorer({ initialLocations }: Props) {
           {(['map', 'list'] as ViewMode[]).map(mode => (
             <button
               key={mode}
-              onClick={() => setViewMode(mode)}
+              onClick={() => {
+                if (mode !== viewMode) {
+                  track('view_mode_changed', { from: viewMode, to: mode })
+                }
+                setViewMode(mode)
+              }}
               className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-medium transition-all"
               style={viewMode === mode ? {
                 backgroundColor: theme.accent + '25',
@@ -159,7 +181,10 @@ export function MapExplorer({ initialLocations }: Props) {
 
         {/* Explore button */}
         <button
-          onClick={() => setExploreOpen(true)}
+          onClick={() => {
+            track('explore_tab_opened', {})
+            setExploreOpen(true)
+          }}
           className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl text-xs font-medium flex-shrink-0 border transition-all bg-black/4 dark:bg-white/4 border-black/8 dark:border-white/8 t-secondary"
         >
           <Compass className="w-3.5 h-3.5" />
@@ -185,7 +210,10 @@ export function MapExplorer({ initialLocations }: Props) {
       {viewMode === 'map' && (
         <div className="absolute bottom-16 left-1/2 -translate-x-1/2 z-20">
           <button
-            onClick={reopenOnboarding}
+            onClick={() => {
+              track('refine_recommendations_clicked', {})
+              reopenOnboarding()
+            }}
             className="flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold shadow-lg transition-all hover:scale-105 active:scale-95"
             style={{
               background: theme.accent,
@@ -242,7 +270,7 @@ export function MapExplorer({ initialLocations }: Props) {
 
       {/* Onboarding modal — first visit only */}
       {showModal && (
-        <OnboardingModal onComplete={handleOnboardingComplete} />
+        <OnboardingModal onComplete={handleOnboardingComplete} trigger={onboardingTrigger} />
       )}
     </div>
   )
